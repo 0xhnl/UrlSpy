@@ -18,7 +18,7 @@ UrlSpy is a powerful tool designed to extract URL paths from a given input file.
 ## Installation
 Clone the repository:
 ```bash
-git clone https://github.com/yourusername/UrlSpy.git
+git clone https://github.com/0xhnl/UrlSpy.git
 cd UrlSpy
 python3 UrlSpy.py
 ```
