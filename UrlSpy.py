@@ -1,6 +1,10 @@
 import re
 import argparse
 import requests
+import urllib3
+
+# Suppress warnings for insecure SSL connections
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 def extract_urls(filename):
     # Define the URL pattern to match URLs in the file
@@ -21,9 +25,11 @@ def extract_urls(filename):
 
 def fetch_and_extract_http_endpoints(url):
     try:
+        # Disable SSL verification to bypass certificate errors
         response = requests.get(url, timeout=5, verify=False)
         response.raise_for_status()
-        # Find all HTTP/HTTPS links in the page source
+
+        # Regex pattern to find HTTP/HTTPS links in the page source
         endpoint_pattern = re.compile(r"https?://[^\s\"'>]+|ftp://[^\s\"'>]+|sftp://[^\s\"'>]+|ftps://[^\s\"'>]+|file://[^\s\"'>]+|tftp://[^\s\"'>]+")
         endpoints = endpoint_pattern.findall(response.text)
         return endpoints
