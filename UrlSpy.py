@@ -21,7 +21,7 @@ def extract_urls(filename):
 
 def fetch_and_extract_http_endpoints(url):
     try:
-        response = requests.get(url, timeout=5)
+        response = requests.get(url, timeout=5, verify=False)
         response.raise_for_status()
         # Find all HTTP/HTTPS links in the page source
         endpoint_pattern = re.compile(r"https?://[^\s\"'>]+|ftp://[^\s\"'>]+|sftp://[^\s\"'>]+|ftps://[^\s\"'>]+|file://[^\s\"'>]+|tftp://[^\s\"'>]+")
